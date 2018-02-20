@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Here, you will write your task. Make sure that the task exits with a return code of 0 if
+# successful and 1 (or some other non-zero) value if it fails!
