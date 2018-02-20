@@ -1,0 +1,66 @@
+---
+resource_types:
+- name: slack-notification
+  type: docker-image
+  source:
+    repository: cfcommunity/slack-notification-resource
+    tag: latest
+
+resources:
+- name: master-source
+  type: git
+  source:
+    uri: git@github.com:pivotalservices/pal-pre-materials.git
+    branch: master
+    private_key: ((team_private_key))
+
+- name: team-source
+  type: git
+  source:
+    uri: git@github.com:pivotalservices/pal-pre-materials.git
+    branch: ((team))
+    private_key: ((team_private_key))
+
+- name: schedule
+  type: time
+  source:
+    interval: 5m
+
+- name: notifier
+  type: slack-notification
+  source:
+     url:  https://hooks.slack.com/services/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
+
+jobs:
+- name: do-measurements
+  public: true
+  serial: true
+  plan:
+  - aggregate:
+    - get: master-source
+    - get: team-source
+    - get: schedule
+      trigger: true
+  - task: measure-sli
+    file: master-source/ci/tasks/measure-sli.yml
+    on_failure:
+      do:
+      - put: notifier
+        params:
+          channel: ((team_slack_channel))
+          text_file: sli-value/error
+          text: |
+            An error occured measuring the SLI! Click <$ATC_EXTERNAL_URL/builds/$BUILD_ID|here> for more info.
+            Reported error:
+            > $TEXT_FILE_CONTENT
+  - task: verify-slo
+    file: master-source/ci/tasks/verify-slo.yml
+    on_failure:
+      do:
+      - put: notifier
+        params:
+          channel: ((team_slack_channel))
+          text_file: slo-failure/message
+          text: |
+            Our SLO has been violated!
+            > $TEXT_FILE_CONTENT
