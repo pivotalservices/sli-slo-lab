@@ -14,6 +14,7 @@ to measure SLIs and verify them against SLOs.
 1. If you do not already have an SSH key associated with your account, [add one](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/).
 
 Once those steps are complete, you can set the pipeline in Concourse, as seen below:
+
 *NOTE*: The credentials used during the `fly login` step are the same used to log in to
 your Ops Manager instance.
 
@@ -21,9 +22,9 @@ your Ops Manager instance.
 $ git checkout master
 $ fly -t pal login -n PCF-PRE<number> -c https://concourse.pal.pivotal.io
 $ fly -t pal set-pipeline -p sli-lab -c pipeline.yml \
-  -v team=PCF-PRE<number> \
-  -v team_slack_channel=TODO \
-  -v team_private_key="$(cat /path/to/ssh-key)"
+    -v team=PCF-PRE<number> \
+    -v team_slack_channel=TODO \
+    -v team_private_key="$(cat /path/to/ssh-key)"
 $ fly -t pal unpause-pipeline -p sli-lab
 ```
 
