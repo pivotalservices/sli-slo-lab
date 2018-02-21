@@ -10,6 +10,8 @@ Important things to know:
     script to install the necessary libraries and just calling a helper script that can live in this
     branch. In your bash script, it would be available in the `team-source` subdirectory of the
     directory the script starts in.
+1. Bash *sucks* at floating point arithmentic. However, the `bc` tool does not. If you're going to use
+    Bash, consider installing it.
 
 ## Implementing `measure-sli`
 
@@ -40,6 +42,23 @@ values you have determined.
 If SLOs are violated, you should put an appropriately descriptive message into a file called
 `slo-failure/message` (the `slo-failure` directory will already exist), and exit with a
 non-zero code. This will tell Concourse to notify you via Slack.
+
+*Tip!* `bc` can do comparison operations too! If you need to compare two floating point
+numbers in a Bash script, instead of
+
+```sh
+if [ $success_rate -lt 0.9 ]; then
+  echo "Too many failures!"
+fi
+```
+
+Try this
+
+```sh
+if (( $(bc <<< "$success_rate < 0.9") )); then
+  echo "Too many failures!"
+fi
+```
 
 ### Note about using apps
 
