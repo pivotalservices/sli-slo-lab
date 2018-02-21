@@ -14,4 +14,4 @@ outputs:
 - name: slo-failure
 
 run:
-  path: team-source/ci/tasks/measure-sli
+  path: team-source/ci/tasks/verify-slo
