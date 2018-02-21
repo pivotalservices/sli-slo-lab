@@ -47,6 +47,8 @@ jobs:
       do:
       - put: notifier
         params:
+          username: SLI Bot
+          icon_emoji: ':pager:'
           channel: ((team_slack_channel))
           text_file: sli-value/error
           text: |
@@ -59,6 +61,8 @@ jobs:
       do:
       - put: notifier
         params:
+          username: SLI Bot
+          icon_emoji: ':pager:'
           channel: ((team_slack_channel))
           text_file: slo-failure/message
           text: |
