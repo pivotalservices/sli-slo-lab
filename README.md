@@ -22,6 +22,7 @@ you an idea what needs to be done. You can use your script to call the URL multi
 and average things, if you'd like.
 
 *Tip!* `curl` is not installed on the base image, but can be.
+
 *Tip!* Use the `-w` flag with `curl` to get information back. For example,
 `curl -w 'HTTP Code: %{http_code}, Total Time: %{time_total}' -s -o /dev/null http://www.google.com`
 
