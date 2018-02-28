@@ -1,8 +1,7 @@
 #!/bin/bash
 eval $(cat sli-value/value)
-if [[  $nonTwoHundo -gt 1 ]]; then
-  echo "total 200s: $nonTwoHundo"
-  echo "PRE3: Too many 400s" | tee slo-failure/message
+if [[  $nonTwoHundo -gt 10 ]]; then
+  echo "PRE3: Too many 500s" | tee slo-failure/message
   exit 1
 fi
 
