@@ -7,6 +7,7 @@ success_rate=$(cat ./sli-value/output.txt)
 
 if [ $success_rate -lt 90 ]; then
   echo "Too many failures!"
+  echo "Your app is down bro" > slo-failure/message
   exit 1
 fi
 exit 0
