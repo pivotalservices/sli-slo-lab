@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sudo apt-get install curl python
+apt-get update -y
+apt-get install -y curl python
 
 curl -w '%{http_code}' -s -o /dev/null http://sample-error-app-surprised-gerenuk.apps.pcf-pre6.pal.pivotal.io/ > sli-value/status-code
 
