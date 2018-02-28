@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[  $totalTwoHundos -gt 10 ]]; then
+if [[  $totalTwoHundos -gt 8 ]]; then
   echo "PRE3: Too many 400s" | tee slo-failure/message
   exit 1
 fi
