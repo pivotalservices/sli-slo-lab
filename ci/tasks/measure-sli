@@ -8,6 +8,6 @@ COUNTER=0
 while [  $COUNTER -lt 100 ]; do
   statusCode=$(curl -w '%{http_code}' -s -o /dev/null sample-error-app-happy-camel.apps.pcf-pre3.pal.pivotal.io)
   if [ "$statusCode" != "200" ]; then
-    totalTwoHundos=$totalTwoHundos + 1
+    totalTwoHundos=$($totalTwoHundos + 1)
   fi
 done

@@ -1,8 +1,8 @@
 #!/bin/bash
 if [  $totalTwoHundos -lt 90 ]; then
-  echo "Too many 400s" | tee slo-failure/message
+  echo "PRE3: Too many 400s" | tee slo-failure/message
   exit 1
 fi
 
-echo "Finished" | tee slo-failure/message
+echo "PRE3: Finished" | tee slo-failure/message
 exit 0
