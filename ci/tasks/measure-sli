@@ -13,3 +13,5 @@ while [  $COUNTER -lt 100 ]; do
   fi
   COUNTER=$(($COUNTER + 1))
 done
+
+echo "nonTwoHundo=$nonTwoHundo" > sli-value/value 
