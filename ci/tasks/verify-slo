@@ -6,5 +6,7 @@ apt-get install -y python
 pwd
 ls -l
 
+cd team-source/ci/tasks
+
 python verify-slo.py
 
