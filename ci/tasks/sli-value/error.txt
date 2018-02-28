@@ -1,0 +1,6 @@
+// todo
+
+If you encounter an error measuring your SLI, you should put an appropriate
+message into a file sli-value/error and exit your script with a non-zero exit
+code (exit 1, for example). This will tell Concourse that something is wrong
+and will notify you via Slack.

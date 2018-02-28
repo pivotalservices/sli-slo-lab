@@ -1,4 +1,44 @@
 #!/bin/bash
 
+apt-get -qq -y update && apt-get -qq -y install bc curl
+
 # Here, you will write your task. Make sure that the task exits with a return code of 0 if
 # successful and 1 (or some other non-zero) value if it fails!
+
+
+TOTALSUCCESS=0
+TOTALRESPONSETIME=0.0
+
+COUNTER=0
+while [  $COUNTER -lt 3 ]; do
+   echo The counter is $COUNTER
+   let COUNTER=COUNTER+1
+   curl -w 'HTTP Code: %{http_code}-Total Time: %{time_total} \n ' -s -o /dev/null http://sample-error-app-proud-badger.apps.pcf-pre7.pal.pivotal.io/ >> ./sli-value/sli-value.txt
+done
+
+while read LINE; do
+  httpcode=$(echo $LINE | cut -f1 -d-)
+  httpcode=$(echo $httpcode |cut -f2 -d:)
+  responsetime=$(echo $LINE | cut -f2 -d-)
+  responsetime=$(echo $responsetime |cut -f2 -d:)
+  echo "$httpcode";
+  echo "$responsetime";
+
+  # TODO UPDATE RESPONSE TIME TO BE WITHIN A CERTAIN TIME AND COUNT SUCCESSFUL TIME
+
+  TOTALRESPONSETIME=$(echo "$TOTALRESPONSETIME + $responsetime" | bc -l)
+  if [ httpcode=="200" ]
+  then
+  TOTALSUCCESS=$(echo "$TOTALSUCCESS+1" | bc -l)
+    echo "total 200: $TOTALSUCCESS"
+  fi
+
+  echo "total response time $TOTALRESPONSETIME"
+ done < ./sli-value/sli-value.txt
+
+ RESULT=0
+ while [  $RESULT -lt 1 ]; do
+    echo The counter is $RESULT
+    let RESULT=RESULT+1
+    echo "total response time: $TOTALRESPONSETIME- total success: $TOTALSUCCESS" > ./sli-value/result.txt
+ done

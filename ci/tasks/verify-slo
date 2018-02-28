@@ -2,3 +2,23 @@
 
 # Here, you will write your task. Make sure that the task exits with a return code of 0 if
 # successful and 1 (or some other non-zero) value if it fails!
+
+success_rate=0
+
+while read LINE; do
+  responseTime=$(echo $LINE | cut -f1 -d-)
+  timeTotal=$(echo $responseTime |cut -f2 -d:)
+  responseCode=$(echo $LINE | cut -f2 -d-)
+  codeSum=$(echo $responseCode |cut -f2 -d:)
+  echo "$timeTotal";
+  echo "$codeSum";
+
+  code_success_rate=$(echo "$codeSum / 3" | bc -l)
+
+done < ./sli-value/result.txt
+
+
+if (( $(bc <<< "$code_success_rate > 0.9") )); then
+  echo "$code_success_rate";
+  echo "too many errors" > ./slo-failure/message
+fi
