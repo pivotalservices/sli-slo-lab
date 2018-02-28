@@ -1,6 +1,6 @@
 #!/bin/bash
-apt-get update
-apt-get install curl
+apt-get -y update
+apt-get -y install curl
 
 statusCode=$(curl -w '%{http_code}' -s -o /dev/null sample-error-app-happy-camel.apps.pcf-pre3.pal.pivotal.io)
 # Here, you will write your task. Make sure that the task exits with a return code of 0 if
