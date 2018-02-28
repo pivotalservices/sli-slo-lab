@@ -1,4 +1,14 @@
 #!/bin/bash
 
+mkdir sli-value
+
+curl -w '%{http_code}' -s -o /dev/null http://sample-error-app-surprised-gerenuk.apps.pcf-pre6.pal.pivotal.io/ > sli-value/status-code
+
+python -c "import sys; print sys.argv[-1] == '201'" $(cat sli-value/status-code) >> sli-value/status-code-results
+
+curl -w '%{time_total}' -s -o /dev/null http://sample-error-app-surprised-gerenuk.apps.pcf-pre6.pal.pivotal.io/ > sli-value/total-time
+
+python -c "import sys; print float(sys.argv[-1]) < 0.1" $(cat sli-value/total-time) >> sli-value/total-time-results
+
 # Here, you will write your task. Make sure that the task exits with a return code of 0 if
 # successful and 1 (or some other non-zero) value if it fails!
