@@ -23,7 +23,7 @@ $ git checkout master
 $ fly -t pal login -n PCF-PRE<number> -c https://concourse.pal.pivotal.io
 $ fly -t pal set-pipeline -p sli-lab -c pipeline.yml \
     -v team=PCF-PRE<number> \
-    -v team_slack_channel=TODO \
+    -v team_slack_channel=#pal-pre-sli-test \
     -v team_private_key="$(cat /path/to/ssh-key)"
 $ fly -t pal unpause-pipeline -p sli-lab
 ```
