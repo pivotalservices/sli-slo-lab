@@ -20,7 +20,6 @@ while line:
 
 success_rate = 1 - (float(failures) / float(samples))
 
-os.remove("sli-value/message")
 if success_rate <= 0.99:
     write_error()
 
