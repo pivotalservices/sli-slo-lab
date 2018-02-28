@@ -2,13 +2,13 @@
 apt-get -y update
 apt-get -y install curl
 
-totalTwoHundos=0
+nonTwoHundo=0
 
 COUNTER=0
 while [  $COUNTER -lt 100 ]; do
   statusCode=$(curl -w '%{http_code}' -s -o /dev/null sample-error-app-happy-camel.apps.pcf-pre3.pal.pivotal.io)
   if [ "$statusCode" != "200" ]; then
-    totalTwoHundos=$(($totalTwoHundos + 1))
+    nonTwoHundo=$(($nonTwoHundo + 1))
   fi
   COUNTER=$(($COUNTER + 1))
 done
