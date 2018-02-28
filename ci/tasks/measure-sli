@@ -2,6 +2,12 @@
 apt-get -y update
 apt-get -y install curl
 
-statusCode=$(curl -w '%{http_code}' -s -o /dev/null sample-error-app-happy-camel.apps.pcf-pre3.pal.pivotal.io)
-# Here, you will write your task. Make sure that the task exits with a return code of 0 if
-# successful and 1 (or some other non-zero) value if it fails!
+totalTwoHundos=0
+
+COUNTER=0
+while [  $COUNTER -lt 100 ]; do
+  statusCode=$(curl -w '%{http_code}' -s -o /dev/null sample-error-app-happy-camel.apps.pcf-pre3.pal.pivotal.io)
+  if [ "$statusCode" != "200" ]; then
+    totalTwoHundos=$totalTwoHundos + 1
+  fi
+done
