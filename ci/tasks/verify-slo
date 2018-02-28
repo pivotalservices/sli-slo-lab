@@ -1,10 +1,10 @@
 #!/bin/bash
 if [ "$statusCode" == "200" ]; then
-  echo "Bad Status Code"
+  echo "Bad Status Code" | tee slo-failure/message
   exit 1
 fi
 
-echo "Finished"
+echo "Finished" | tee slo-failure/message
 exit 1
 # Here, you will write your task. Make sure that the task exits with a return code of 0 if
 # successful and 1 (or some other non-zero) value if it fails!
