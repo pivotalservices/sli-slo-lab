@@ -10,4 +10,5 @@ while [  $COUNTER -lt 100 ]; do
   if [ "$statusCode" != "200" ]; then
     totalTwoHundos=$(($totalTwoHundos + 1))
   fi
+  COUNTER=$(($COUNTER + 1))
 done
