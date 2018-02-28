@@ -3,7 +3,7 @@
 import os
 
 def write_error():
-    f = open("sli-value/message","w")
+    f = open("slo-failure/message","w")
     f.write("Too many failures!")
     f.close() 
 
