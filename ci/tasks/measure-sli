@@ -15,6 +15,7 @@ do
     if  [ $http_code -eq 200 ]; then
         success_count=$[$success_count+1]
     fi
-done   
+done 
+echo $success_count
 echo $success_count > ./sli-value/output.txt
 exit 0
