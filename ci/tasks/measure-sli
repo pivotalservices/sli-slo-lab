@@ -2,3 +2,19 @@
 
 # Here, you will write your task. Make sure that the task exits with a return code of 0 if
 # successful and 1 (or some other non-zero) value if it fails!
+
+if ! [ -d ./sli-value ]; then
+    mkdir ./sli-value
+fi
+
+success_count=0
+
+for i in {1..100}
+do 
+    http_code=$(curl -w '%{http_code}' -s -o /dev/null http://sample-error-app-nice-otter.apps.pcf-pre1.pal.pivotal.io/)
+    if  [ $http_code -eq 200 ]; then
+        success_count=$[$success_count+1]
+    fi
+done   
+echo $success_count > ./sli-value/output.txt
+exit 0
